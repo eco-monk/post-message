@@ -1,0 +1,48 @@
+<html>
+  <body>
+    <p>
+      Send "Parent message" <button onclick="sendMessage('Parent message')">send</button>
+      Send [ 1, 2, 3 ] <button onclick="sendMessage([1, 2, 3])">send</button>
+      Send complex array <button onclick="sendComplexMessage(1)">send</button>
+    </p>
+    <script>
+       
+   const frameEle = document.getElementById("frameEle");
+      const frameEle1 = document.getElementById("frameEle1");
+   function sendMessage(data) {
+       console.log("send triggered", data);
+       frameEle.contentWindow.postMessage(data, '*');
+       frameEle1.contentWindow.postMessage(data, '*');
+   }
+      
+   function sendComplexMessage(type) {
+    let data = "data";
+    switch (type) {
+      case 1:
+        data = [
+          {
+            "label": "Blue",
+            "value": "BLUE"
+          },
+          {
+            "label": "Green",
+            "value": "GREEN"
+          },
+          {
+            "label": "Red",
+            "value": "RED"
+          }
+        ];
+        break;
+     }
+     sendMessage(data);
+   }
+   
+   window.addEventListener('message', function (e) {
+      // Get the sent data
+      console.log("from iframe", e);
+  });
+        
+  </script>
+  </<body>
+</html>
