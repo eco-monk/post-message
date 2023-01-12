@@ -7,12 +7,9 @@
     </p>
     <script>
        
-   const frameEle = document.getElementById("frameEle");
-      const frameEle1 = document.getElementById("frameEle1");
    function sendMessage(data) {
        console.log("send triggered", data);
-       frameEle.contentWindow.postMessage(data, '*');
-       frameEle1.contentWindow.postMessage(data, '*');
+      window.parent.postMessage(data, "*");
    }
       
    function sendComplexMessage(type) {
